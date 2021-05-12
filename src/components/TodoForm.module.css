@@ -1,0 +1,74 @@
+.container {
+    height: 200px;
+    background-image: url('../assets/bg-mobile-dark.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container.light {
+    background-image: url('../assets/bg-mobile-light.jpg');
+}
+.header {
+    width: 90vw;
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 3rem 0 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header h1 {
+    letter-spacing: 5px;
+}
+.header button {
+    color: #f5f5f5;
+    font-size: 1.5rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+.form {
+    width: 90vw;
+    max-width: 540px;
+    margin: 0 auto;
+    position: relative;
+}
+.form.light input {
+    color: #25273c;
+    background-color: #ffffff;
+}
+.form input {
+    width: 100%;
+    font-size: 16px;
+    padding: 1rem 4rem;
+    font-family: inherit;
+    border: none;
+    border-radius: 0.4rem;
+    color: #ffffff;
+    background-color: #25273c;
+}
+.form::before {
+    content: '';
+    width: 26px;
+    height: 26px;
+    border: 1px solid #4d5066;
+    background-color: transparent;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+@media (min-width: 600px) {
+    .container {
+        height: 300px;
+        background-image: url('../assets/bg-desktop-dark.jpg');
+    }
+    .header {
+        padding: 5rem 0 5rem 0;
+    }
+    .container.light {
+        height: 300px;
+        background-image: url('../assets/bg-desktop-light.jpg');
+    }
+}

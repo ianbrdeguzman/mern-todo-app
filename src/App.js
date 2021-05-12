@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+import { data } from './components/data';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [theme, setTheme] = useState('dark');
+    const [todoList, setTodoList] = useState(data);
+    const [filterList, setFilterList] = useState(data);
+
+    const handleThemeOnClick = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark');
+    };
+
+    return (
+        <div>
+            <TodoForm
+                setTodoList={setTodoList}
+                todoList={todoList}
+                theme={theme}
+                handleThemeOnClick={handleThemeOnClick}
+            />
+            <TodoList
+                setTodoList={setTodoList}
+                todoList={todoList}
+                theme={theme}
+                setFilterList={setFilterList}
+                filterList={filterList}
+            />
+        </div>
+    );
 }
 
 export default App;
