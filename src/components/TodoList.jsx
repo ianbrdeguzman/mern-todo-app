@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './TodoList.module.css';
 import Todo from './Todo';
+import { deleteTodoItem, getTodoList, deleteCompletedTodos } from './api';
 
 const TodoList = ({
     todoList,
@@ -9,9 +10,13 @@ const TodoList = ({
     filterList,
     setFilterList,
 }) => {
-    const handleRemoveOnClick = (id) => {
-        const newList = todoList.filter((todo) => todo._id !== id);
-        setTodoList(newList);
+    const handleDeleteOnClick = (id) => {
+        const deleteTodo = async () => {
+            await deleteTodoItem(id);
+            const data = await getTodoList();
+            setTodoList(data);
+        };
+        deleteTodo();
     };
 
     const handleFilterOnClick = (e) => {
@@ -26,6 +31,15 @@ const TodoList = ({
         setFilterList(filteredList);
     };
 
+    const handleClearOnClick = () => {
+        const clearCompletedTodos = async () => {
+            await deleteCompletedTodos();
+            const data = await getTodoList();
+            setTodoList(data);
+        };
+        clearCompletedTodos();
+    };
+
     return (
         <div
             className={
@@ -35,12 +49,12 @@ const TodoList = ({
             }
         >
             <ul className={styles.content}>
-                {filterList.map((todo) => {
+                {filterList?.map((todo) => {
                     return (
                         <Todo
                             todo={todo}
                             key={todo._id}
-                            handleRemoveOnClick={handleRemoveOnClick}
+                            handleDeleteOnClick={handleDeleteOnClick}
                             theme={theme}
                             todoList={todoList}
                             setTodoList={setTodoList}
@@ -49,7 +63,9 @@ const TodoList = ({
                 })}
                 <div className={styles.content__footer}>
                     <p>{todoList.length} items left</p>
-                    <button>Clear Completed</button>
+                    <button onClick={handleClearOnClick}>
+                        Clear Completed
+                    </button>
                 </div>
                 <div className={styles.content__tools}>
                     <button value='all' onClick={handleFilterOnClick}>

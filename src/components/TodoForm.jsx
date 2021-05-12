@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import styles from './TodoForm.module.css';
 import sun from '../assets/icon-sun.svg';
 import moon from '../assets/icon-moon.svg';
+import { postTodoItem, getTodoList } from './api';
 
 const TodoForm = ({ todoList, setTodoList, theme, handleThemeOnClick }) => {
     const [input, setInput] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newTodo = {
-            id: new Date().getTime(),
-            text: input,
+        const createPost = async (input) => {
+            await postTodoItem(input);
+            const data = await getTodoList();
+            setTodoList(data);
         };
-        setTodoList([...todoList, newTodo]);
+        createPost(input);
         setInput('');
     };
 

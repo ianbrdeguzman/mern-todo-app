@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Todo.module.css';
 import cross from '../assets/icon-cross.svg';
+import { updateTodoItem, getTodoList } from './api';
 
-const Todo = ({ todo, handleRemoveOnClick, theme, todoList, setTodoList }) => {
-    const [checked, setChecked] = useState(false);
-
-    const handleCheckOnChange = (id) => {
-        console.log(id);
+const Todo = ({ todo, handleDeleteOnClick, theme, todoList, setTodoList }) => {
+    const handleCheckOnChange = (id, bool) => {
+        const updateTodo = async (id, bool) => {
+            await updateTodoItem(id, !bool);
+            const data = await getTodoList();
+            setTodoList(data);
+        };
+        updateTodo(id, bool);
     };
 
     return (
@@ -21,11 +25,13 @@ const Todo = ({ todo, handleRemoveOnClick, theme, todoList, setTodoList }) => {
                 type='checkbox'
                 name='done'
                 id='done'
-                onChange={() => handleCheckOnChange(todo._id)}
+                checked={todo.completed}
+                onChange={() => handleCheckOnChange(todo._id, todo.completed)}
             />
-            {/* <p className={!checked ? styles.checked : null}>{todo.text}</p> */}
-            <p className={checked ? styles.checked : null}>{todo.text}</p>
-            <button onClick={() => handleRemoveOnClick(todo._id)}>
+            <p className={todo.completed ? styles.checked : null}>
+                {todo.text}
+            </p>
+            <button onClick={() => handleDeleteOnClick(todo._id)}>
                 <img src={cross} alt='remove' />
             </button>
         </li>
