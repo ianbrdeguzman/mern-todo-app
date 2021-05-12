@@ -1,6 +1,6 @@
 .container {
     color: #272727;
-    height: calc(100vh - 200px);
+    min-height: calc(100vh - 200px);
     background-color: #161722;
 }
 .container.light {
@@ -68,6 +68,9 @@
     margin: 0 1rem;
 }
 @media (min-width: 600px) {
+    .container {
+        min-height: calc(100vh - 300px);
+    }
     .content__tools {
         position: absolute;
         bottom: -1rem;
