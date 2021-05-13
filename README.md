@@ -8,5 +8,6 @@ Repo for backend [here!](https://github.com/ianbrdeguzman/mern-todo-app-backend)
 
 -   React
 -   CSS Modules
+-   Redux
 -   Axios
 -   Firebase Hosting
