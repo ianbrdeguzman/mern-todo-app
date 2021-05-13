@@ -3,6 +3,7 @@ import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getTodoList, copyTodoList } from './redux/actions/todo.action';
+import Loader from './components/Loader';
 
 function App() {
     const { todoList, copyOfTodoList } = useSelector((state) => state);
@@ -21,7 +22,7 @@ function App() {
     return (
         <div>
             <TodoForm />
-            {copyOfTodoList && <TodoList />}
+            {copyOfTodoList ? <TodoList /> : <Loader />}
         </div>
     );
 }

@@ -11,7 +11,7 @@ const TodoList = () => {
 
     const dispatch = useDispatch();
 
-    const activeList = todoList.filter((todo) => todo.completed === false);
+    const activeList = todoList?.filter((todo) => todo.completed === false);
 
     const handleFilterOnClick = (e) => {
         let newList;
@@ -45,7 +45,7 @@ const TodoList = () => {
                     return <Todo todo={todo} key={todo._id} />;
                 })}
                 <div className={styles.content__footer}>
-                    <p>{activeList.length} items left</p>
+                    <p>{activeList?.length} items left</p>
                     <button onClick={handleClearOnClick}>
                         Clear Completed
                     </button>
