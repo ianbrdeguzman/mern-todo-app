@@ -2,20 +2,24 @@ import React, { useState } from 'react';
 import styles from './TodoForm.module.css';
 import sun from '../assets/icon-sun.svg';
 import moon from '../assets/icon-moon.svg';
-import { postTodoItem, getTodoList } from './api';
+import { useDispatch, useSelector } from 'react-redux';
+import { postTodoItem, toggleTheme } from '../redux/actions/todo.action';
 
-const TodoForm = ({ todoList, setTodoList, theme, handleThemeOnClick }) => {
+const TodoForm = () => {
     const [input, setInput] = useState('');
+
+    const { theme } = useSelector((state) => state);
+
+    const dispatch = useDispatch();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const createPost = async (input) => {
-            await postTodoItem(input);
-            const data = await getTodoList();
-            setTodoList(data);
-        };
-        createPost(input);
+        dispatch(postTodoItem(input));
         setInput('');
+    };
+
+    const handleThemeOnClick = () => {
+        dispatch(toggleTheme());
     };
 
     return (

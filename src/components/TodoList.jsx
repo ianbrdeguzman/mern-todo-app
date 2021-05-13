@@ -1,43 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './TodoList.module.css';
 import Todo from './Todo';
-import { deleteTodoItem, getTodoList, deleteCompletedTodos } from './api';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterList, deleteCompletedTodos } from '../redux/actions/todo.action';
 
-const TodoList = ({
-    todoList,
-    setTodoList,
-    theme,
-    filterList,
-    setFilterList,
-}) => {
-    const handleDeleteOnClick = (id) => {
-        const deleteTodo = async () => {
-            await deleteTodoItem(id);
-            const data = await getTodoList();
-            setTodoList(data);
-        };
-        deleteTodo();
-    };
+const TodoList = () => {
+    const [filter, setFilter] = useState('all');
+
+    const { todoList, copyOfTodoList, theme } = useSelector((state) => state);
+
+    const dispatch = useDispatch();
+
+    const activeList = todoList.filter((todo) => todo.completed === false);
 
     const handleFilterOnClick = (e) => {
-        let filteredList;
+        let newList;
         if (e.target.value === 'all') {
-            filteredList = todoList;
+            newList = todoList;
+            setFilter('all');
         } else if (e.target.value === 'active') {
-            filteredList = todoList.filter((todo) => todo.completed !== true);
+            newList = todoList.filter((todo) => todo.completed !== true);
+            setFilter('active');
         } else {
-            filteredList = todoList.filter((todo) => todo.completed === true);
+            newList = todoList.filter((todo) => todo.completed === true);
+            setFilter('completed');
         }
-        setFilterList(filteredList);
+        dispatch(filterList(newList));
     };
 
     const handleClearOnClick = () => {
-        const clearCompletedTodos = async () => {
-            await deleteCompletedTodos();
-            const data = await getTodoList();
-            setTodoList(data);
-        };
-        clearCompletedTodos();
+        dispatch(deleteCompletedTodos());
     };
 
     return (
@@ -49,32 +41,37 @@ const TodoList = ({
             }
         >
             <ul className={styles.content}>
-                {filterList?.map((todo) => {
-                    return (
-                        <Todo
-                            todo={todo}
-                            key={todo._id}
-                            handleDeleteOnClick={handleDeleteOnClick}
-                            theme={theme}
-                            todoList={todoList}
-                            setTodoList={setTodoList}
-                        />
-                    );
+                {copyOfTodoList?.map((todo) => {
+                    return <Todo todo={todo} key={todo._id} />;
                 })}
                 <div className={styles.content__footer}>
-                    <p>{todoList.length} items left</p>
+                    <p>{activeList.length} items left</p>
                     <button onClick={handleClearOnClick}>
                         Clear Completed
                     </button>
                 </div>
                 <div className={styles.content__tools}>
-                    <button value='all' onClick={handleFilterOnClick}>
+                    <button
+                        value='all'
+                        onClick={handleFilterOnClick}
+                        className={filter === 'all' ? styles.selected : null}
+                    >
                         All
                     </button>
-                    <button value='active' onClick={handleFilterOnClick}>
+                    <button
+                        value='active'
+                        onClick={handleFilterOnClick}
+                        className={filter === 'active' ? styles.selected : null}
+                    >
                         Active
                     </button>
-                    <button value='completed' onClick={handleFilterOnClick}>
+                    <button
+                        value='completed'
+                        onClick={handleFilterOnClick}
+                        className={
+                            filter === 'completed' ? styles.selected : null
+                        }
+                    >
                         Completed
                     </button>
                 </div>

@@ -1,46 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import TodoForm from './components/TodoForm';
 import TodoList from './components/TodoList';
-import { getTodoList } from './components/api';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTodoList, copyTodoList } from './redux/actions/todo.action';
 
 function App() {
-    const [theme, setTheme] = useState('dark');
-    const [todoList, setTodoList] = useState('');
-    const [filterList, setFilterList] = useState('');
+    const { todoList, copyOfTodoList } = useSelector((state) => state);
 
-    const handleThemeOnClick = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark');
-    };
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setFilterList(todoList);
-    }, [todoList]);
+        dispatch(getTodoList());
+    }, [dispatch]);
 
+    // create a copy of todoList
     useEffect(() => {
-        const fetchTodoList = async () => {
-            const data = await getTodoList();
-            setTodoList(data);
-        };
-        fetchTodoList();
-    }, []);
+        dispatch(copyTodoList(todoList));
+    }, [todoList, dispatch]);
 
     return (
         <div>
-            <TodoForm
-                setTodoList={setTodoList}
-                todoList={todoList}
-                theme={theme}
-                handleThemeOnClick={handleThemeOnClick}
-            />
-            {filterList && (
-                <TodoList
-                    setTodoList={setTodoList}
-                    todoList={todoList}
-                    theme={theme}
-                    setFilterList={setFilterList}
-                    filterList={filterList}
-                />
-            )}
+            <TodoForm />
+            {copyOfTodoList && <TodoList />}
         </div>
     );
 }

@@ -1,16 +1,20 @@
 import React from 'react';
 import styles from './Todo.module.css';
 import cross from '../assets/icon-cross.svg';
-import { updateTodoItem, getTodoList } from './api';
+import { updateTodoItem, deleteTodoItem } from '../redux/actions/todo.action';
+import { useDispatch, useSelector } from 'react-redux';
 
-const Todo = ({ todo, handleDeleteOnClick, theme, todoList, setTodoList }) => {
+const Todo = ({ todo }) => {
+    const { theme } = useSelector((state) => state);
+
+    const dispatch = useDispatch();
+
     const handleCheckOnChange = (id, bool) => {
-        const updateTodo = async (id, bool) => {
-            await updateTodoItem(id, !bool);
-            const data = await getTodoList();
-            setTodoList(data);
-        };
-        updateTodo(id, bool);
+        dispatch(updateTodoItem(id, !bool));
+    };
+
+    const handleDeleteOnClick = async (id) => {
+        dispatch(deleteTodoItem(id));
     };
 
     return (
