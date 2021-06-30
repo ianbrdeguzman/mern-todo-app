@@ -2,7 +2,10 @@
 
 Check it out [here!](https://mern-todo-app-1f57a.web.app/)
 
-Repo for backend [here!](https://github.com/ianbrdeguzman/mern-todo-app-backend)
+## Update:
+
+-   Deployed backend to Firebase Functions
+-   [Repo](https://github.com/ianbrdeguzman/mern-todo-app-backend)
 
 ## Created using:
 
@@ -15,7 +18,7 @@ Repo for backend [here!](https://github.com/ianbrdeguzman/mern-todo-app-backend)
 ## Features Implemented:
 
 -   Toggle Dark and Light Theme
--   Create / Read / Update / Destroy Todos
+-   Create / Read / Update / Delete Todos
 -   Filter Active / Completed Todos
 
 ## TODOs:
