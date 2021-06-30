@@ -14,8 +14,10 @@ const TodoForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(postTodoItem(input));
-        setInput('');
+        if (input.length > 0) {
+            dispatch(postTodoItem(input));
+            setInput('');
+        }
     };
 
     const handleThemeOnClick = () => {

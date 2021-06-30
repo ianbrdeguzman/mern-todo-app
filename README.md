@@ -11,3 +11,13 @@ Repo for backend [here!](https://github.com/ianbrdeguzman/mern-todo-app-backend)
 -   Redux
 -   Axios
 -   Firebase Hosting
+
+## Features Implemented:
+
+-   Toggle Dark and Light Theme
+-   Create / Read / Update / Destroy Todos
+-   Filter Active / Completed Todos
+
+## TODOs:
+
+-   Drag and drop Todos

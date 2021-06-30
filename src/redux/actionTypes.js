@@ -1,4 +1,8 @@
 export const GET_TODO_LIST = 'GET_TODO_LIST';
+export const CREATE_TODO = 'CREATE_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+export const UPDATE_TODO = 'UPDATE_TODO';
+export const DELETE_COMPLETED_TODO = 'DELETE_COMPLETED_TODO';
 export const COPY_TODO_LIST = 'COPY_TODO_LIST';
 export const TOGGLE_THEME = 'TOGGLE_THEME';
 export const FILTER_LIST = 'FILTER_LIST';
