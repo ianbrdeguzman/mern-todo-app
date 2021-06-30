@@ -88,7 +88,7 @@ export const updateTodoItem = (id, bool) => async (dispatch) => {
 
 export const deleteCompletedTodos = () => async (dispatch) => {
     try {
-        const res = await axios.delete(
+        await axios.delete(
             // 'https://still-oasis-78638.herokuapp.com/delete',
             'https://us-central1-todo-firebase-functions.cloudfunctions.net/app/api/delete/',
             {
