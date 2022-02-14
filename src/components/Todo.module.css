@@ -1,64 +1,63 @@
 .todo__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #25273c;
-    padding: 1rem;
-    color: #cacde8;
-    position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #25273c;
+  padding: 1rem;
+  color: #cacde8;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .todo__item.light {
-    color: #484b6a;
-    background-color: #ffffff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: #484b6a;
+  background-color: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .todo__item.light input::before {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 .todo__item input {
-    margin-right: 2rem;
-    margin-left: 0.5rem;
+  margin-right: 2rem;
+  margin-left: 0.5rem;
 }
 .todo__item input::before {
-    content: '';
-    width: 26px;
-    height: 26px;
-    border: 1px solid #4d5066;
-    background-color: #25273c;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 1rem;
-    transform: translateY(-50%);
-    cursor: pointer;
+  content: "";
+  width: 26px;
+  height: 26px;
+  border: 1px solid #4d5066;
+  background-color: #25273c;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  cursor: pointer;
 }
 .todo__item input:checked:before {
-    background: url('../assets/icon-check.svg'),
-        linear-gradient(#57ddff, #c058f3);
-    background-position: center;
-    background-repeat: no-repeat;
+  background: url("../assets/icon-check.svg"), linear-gradient(#57ddff, #c058f3);
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .todo__item p {
-    flex: 1;
-    margin-right: 2rem;
-    white-space: nowrap;
-    overflow-x: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  flex: 1;
+  margin-right: 2rem;
+  white-space: nowrap;
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .todo__item p::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .todo__item p.checked {
-    text-decoration: line-through;
-    color: #4d5066;
+  text-decoration: line-through;
+  color: #4d5066;
 }
 .todo__item button {
-    color: #f5f5f5;
-    font-size: 1.5rem;
-    border: none;
-    outline: none;
-    background-color: transparent;
-    cursor: pointer;
+  color: #f5f5f5;
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
 }
